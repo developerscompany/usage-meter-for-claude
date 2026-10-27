@@ -1,0 +1,25 @@
+name: Bug report
+description: Something on a key or in its settings isn't right
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Which key, what it shows, and what you expected. A screenshot of the key and its settings helps.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Plugin version, Stream Deck app version, macOS or Windows version
+      placeholder: "3.1.1, Stream Deck 7.1, macOS 15.1"
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: The end of logs/plugin.log from the plugin folder, if anything failed. It never contains your login.
+      render: text

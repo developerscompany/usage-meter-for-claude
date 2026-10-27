@@ -1,0 +1,5 @@
+First release on Marketplace.
+
+• 15 keys: 5-hour and weekly plan limits for every model, both limits on one key, peak hours, cloud credit, API credit, extra usage, token usage, API cost, cache hits, model mix, session context, streak, Claude status, and a key that launches Claude Code.
+• Ten display styles, with live previews in each key's settings.
+• Help links in the settings of every key.

@@ -1,0 +1,40 @@
+name: Release
+
+# Push a tag such as v3.1.1 to build, test and publish the .streamDeckPlugin file with the notes from CHANGELOG.md.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: The tag matches the manifest version
+        run: |
+          node -e '
+            const version = require("./agency.rivo.usage-meter-for-claude.sdPlugin/manifest.json").Version;
+            const tag = process.env.GITHUB_REF_NAME.replace(/^v/, "");
+            if (!version.startsWith(`${tag}.`)) { console.error(`manifest ${version}, tag ${tag}`); process.exit(1); }
+          '
+      - run: npm test
+      - run: npm run pack
+      - name: Release notes from the changelog
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v v="$version" 'index($0, "## " v " ") == 1 { found = 1; next } found && /^## / { exit } found' CHANGELOG.md > notes.md
+          test -s notes.md || echo "See CHANGELOG.md." > notes.md
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh release create "$GITHUB_REF_NAME" dist/agency.rivo.usage-meter-for-claude.streamDeckPlugin
+          --title "Usage Meter for Claude ${GITHUB_REF_NAME#v}" --notes-file notes.md

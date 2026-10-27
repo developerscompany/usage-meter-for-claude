@@ -1,0 +1,22 @@
+Usage Meter for Claude puts your Claude usage on Stream Deck keys, so you see what's left before you hit a limit.
+
+15 keys:
+• 5-Hour Limit and Weekly Limit, for all models or just Fable, Opus, Sonnet or Haiku, with the time until reset
+• Both Limits on one key
+• Peak Hours: whether it's peak time now, and when it starts or ends, in your time zone
+• Cloud Credit: dollars left of your cloud session credit
+• API Credit: what's left of a Claude Console credit after your API spend
+• Extra Usage this month
+• Token Usage and API Cost of your Claude Code work, by day, week or month
+• Cache Hits, Model Mix and Session Context
+• Streak: days in a row with Claude Code
+• Claude Status from status.claude.com, naming the model in trouble
+• Launch Claude Code in the folder you choose
+
+Ten display styles (ring, gauge, battery, history and more) with live previews, your own yellow and red levels, and several Claude Code accounts.
+
+Requirements: Claude Code signed in on this computer (Pro or Max plan) for the limit and credit keys. Token, cost, cache and streak keys read Claude Code's local logs. The API Credit key needs a Claude Console Admin API key.
+
+Privacy: everything runs on your computer and nothing is collected. The plugin only reads your Claude Code login and logs, and talks only to Anthropic (api.anthropic.com) and status.claude.com.
+
+Unofficial plugin by Rivo Agency, not affiliated with or endorsed by Anthropic. Claude is a trademark of Anthropic.

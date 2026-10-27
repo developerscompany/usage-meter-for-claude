@@ -1,0 +1,14 @@
+name: Idea
+description: A new key, style or setting
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like the plugin to show or do?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it would help

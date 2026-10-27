@@ -1,0 +1,6 @@
+node_modules/
+dist/
+agency.rivo.usage-meter-for-claude.sdPlugin/bin/
+agency.rivo.usage-meter-for-claude.sdPlugin/logs/
+test/output/
+.DS_Store

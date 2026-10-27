@@ -1,0 +1,4 @@
+• Claude Status names the model in trouble, such as DEGRADED · Fable 5, and can watch one model family: Fable, Opus, Sonnet or Haiku.
+• Its Details style shows how far the fix is and which services are hit.
+• Account pickers show the email signed in to each Claude Code profile, with a step-by-step guide for adding another Claude account.
+• Launch Claude Code opens Claude Code with any of your accounts, and takes a tag.

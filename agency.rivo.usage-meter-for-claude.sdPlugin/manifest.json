@@ -1,0 +1,303 @@
+{
+	"$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+	"UUID": "agency.rivo.usage-meter-for-claude",
+	"Name": "Usage Meter for Claude",
+	"Version": "3.1.1.0",
+	"Author": "Rivo Agency",
+	"URL": "https://github.com/developerscompany/usage-meter-for-claude",
+	"SupportURL": "https://github.com/developerscompany/usage-meter-for-claude/issues",
+	"Description": "Claude usage on your Stream Deck: 5-hour and weekly plan limits for every model, peak hours, cloud and API credit, tokens and API-equivalent cost of Claude Code, cache hits, model mix, session context, streak, service status, and a key that starts Claude Code. Unofficial; not affiliated with Anthropic.",
+	"Category": "Usage Meter for Claude",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"Icon": "imgs/plugin/icon",
+	"CodePath": "bin/plugin.js",
+	"SDKVersion": 3,
+	"Software": {
+		"MinimumVersion": "6.9"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "12"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20"
+	},
+	"Actions": [
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.limit5h",
+			"Name": "5-Hour Limit",
+			"Icon": "imgs/actions/limit5h/icon",
+			"Tooltip": "Claude plan 5-hour (session) limit: what's left or used, 10 display styles. Hold to refresh.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/limit5h/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.limit7d",
+			"Name": "Weekly Limit",
+			"Icon": "imgs/actions/limit7d/icon",
+			"Tooltip": "Claude plan weekly limit: all models, or Fable, Opus, Sonnet or Haiku alone. 10 display styles. Hold to refresh.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/limit7d/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.limits",
+			"Name": "Both Limits",
+			"Icon": "imgs/actions/limits/icon",
+			"Tooltip": "5-hour and weekly limits on one key. Hold to refresh.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/limits/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.peak",
+			"Name": "Peak Hours",
+			"Icon": "imgs/actions/peak/icon",
+			"Tooltip": "Is it Claude's peak time (weekdays 5–11 AM Pacific), and when it ends or starts, in your time. Press for the next style.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/peak/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.credit",
+			"Name": "Cloud Credit",
+			"Icon": "imgs/actions/credit/icon",
+			"Tooltip": "Cloud session credit of your Claude plan: dollars left of the amount granted, and when it expires.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/credit/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.apicredit",
+			"Name": "API Credit",
+			"Icon": "imgs/actions/apicredit/icon",
+			"Tooltip": "A Claude Console credit, such as promotional API credit: what is left after your API spend, from the Admin API.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/apicredit/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.extra",
+			"Name": "Extra Usage",
+			"Icon": "imgs/actions/extra/icon",
+			"Tooltip": "Extra usage spent this month on top of your plan.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/extra/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.usage",
+			"Name": "Token Usage",
+			"Icon": "imgs/actions/usage/icon",
+			"Tooltip": "Claude Code tokens for today / 7 days / this month, in millions. Press to switch period, hold to rescan.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/usage/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.cost",
+			"Name": "API Cost",
+			"Icon": "imgs/actions/cost/icon",
+			"Tooltip": "What your Claude Code usage would cost at API list prices. Press to switch period.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/cost/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.cache",
+			"Name": "Cache Hits",
+			"Icon": "imgs/actions/cache/icon",
+			"Tooltip": "How much of Claude Code's input came from the prompt cache, and what that saved at API prices. Press for the next period.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/cache/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.models",
+			"Name": "Model Mix",
+			"Icon": "imgs/actions/models/icon",
+			"Tooltip": "Share of Opus, Sonnet, Haiku and others in your usage. Press to switch period.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/models/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.context",
+			"Name": "Session Context",
+			"Icon": "imgs/actions/context/icon",
+			"Tooltip": "How full the context of your latest Claude Code session is. Press for the next session.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/context/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.streak",
+			"Name": "Streak",
+			"Icon": "imgs/actions/streak/icon",
+			"Tooltip": "Days in a row you have used Claude Code. Press for the next style.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/streak/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.status",
+			"Name": "Claude Status",
+			"Icon": "imgs/actions/status/icon",
+			"Tooltip": "Claude service status from status.claude.com, naming the model or service in trouble. Press to open the incident.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/status/key",
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "agency.rivo.usage-meter-for-claude.launch",
+			"Name": "Launch Claude Code",
+			"Icon": "imgs/actions/launch/icon",
+			"Tooltip": "Opens a terminal running claude in the folder you choose, with any of your Claude accounts.",
+			"PropertyInspectorPath": "ui/inspector.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": false,
+			"UserTitleEnabled": false,
+			"States": [
+				{
+					"Image": "imgs/actions/launch/key",
+					"ShowTitle": false
+				}
+			]
+		}
+	]
+}

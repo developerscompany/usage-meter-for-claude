@@ -1,0 +1,41 @@
+{
+  "name": "usage-meter-for-claude",
+  "version": "3.1.1",
+  "private": true,
+  "description": "Usage Meter for Claude: Stream Deck keys for Claude plan limits, peak hours, credit, tokens, API cost, cache, models, session context, streak and status",
+  "license": "MIT",
+  "author": "Rivo Agency",
+  "homepage": "https://github.com/developerscompany/usage-meter-for-claude#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/developerscompany/usage-meter-for-claude.git"
+  },
+  "bugs": {
+    "url": "https://github.com/developerscompany/usage-meter-for-claude/issues"
+  },
+  "keywords": [
+    "stream-deck",
+    "elgato",
+    "claude",
+    "claude-code",
+    "anthropic",
+    "usage",
+    "limits"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.js",
+    "icons": "node scripts/make-icons.mjs",
+    "pack": "npm run build && streamdeck validate agency.rivo.usage-meter-for-claude.sdPlugin && streamdeck pack agency.rivo.usage-meter-for-claude.sdPlugin --output dist --force",
+    "marketplace": "node scripts/marketplace.mjs"
+  },
+  "dependencies": {
+    "@elgato/streamdeck": "3.0.3"
+  },
+  "devDependencies": {
+    "@elgato/cli": "1.10.3",
+    "esbuild": "0.25.10",
+    "ws": "8.22.0"
+  }
+}
