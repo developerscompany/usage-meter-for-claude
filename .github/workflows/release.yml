@@ -29,6 +29,7 @@ jobs:
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
+      - run: npm run build
       - run: npm test
       - run: npm run pack
       - name: Release notes from the changelog
