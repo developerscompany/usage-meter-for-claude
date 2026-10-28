@@ -23,3 +23,9 @@ npm test
 - The plugin must stay read-only towards logins and keys: it may read them, never refresh, store or log them.
 - Add or update tests with your change; the end-to-end tests in `test/plugin.e2e.test.js` run the built plugin against a fake Stream Deck and fake APIs.
 - Keep the code style of the file you change.
+
+## Releasing
+
+1. Raise the version in `agency.rivo.usage-meter-for-claude.sdPlugin/manifest.json` (four parts, such as `3.1.2.0`) and `package.json`, and add a section for it at the top of `CHANGELOG.md`.
+2. Push to `main` and wait for CI to pass.
+3. In the **Actions** tab, open **Release** and click **Run workflow**. It builds and tests the plugin, then publishes `v3.1.2` with the `.streamDeckPlugin` file and the notes from the changelog.

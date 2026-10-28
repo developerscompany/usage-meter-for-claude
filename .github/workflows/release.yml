@@ -1,8 +1,9 @@
 name: Release
 
-# A tag such as v3.1.1 (pushed, or made with a release) builds, tests and publishes the .streamDeckPlugin file,
-# with the notes from CHANGELOG.md.
+# Builds, tests and publishes the .streamDeckPlugin file as a GitHub release, with the notes from CHANGELOG.md.
+# Run it from the Actions tab (Run workflow) to release the version in the manifest, or push a tag such as v3.1.1.
 on:
+  workflow_dispatch:
   push:
     tags: ["v*"]
 
@@ -19,28 +20,35 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: The tag matches the manifest version
+      - name: Version from the manifest
+        id: version
         run: |
-          node -e '
-            const version = require("./agency.rivo.usage-meter-for-claude.sdPlugin/manifest.json").Version;
-            const tag = process.env.GITHUB_REF_NAME.replace(/^v/, "");
-            if (!version.startsWith(`${tag}.`)) { console.error(`manifest ${version}, tag ${tag}`); process.exit(1); }
-          '
+          version=$(node -p 'require("./agency.rivo.usage-meter-for-claude.sdPlugin/manifest.json").Version.split(".").slice(0, 3).join(".")')
+          if [ "$GITHUB_REF_TYPE" = "tag" ] && [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "The tag $GITHUB_REF_NAME does not match the manifest version $version"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
       - run: npm test
       - run: npm run pack
       - name: Release notes from the changelog
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          version="${GITHUB_REF_NAME#v}"
-          awk -v v="$version" 'index($0, "## " v " ") == 1 { found = 1; next } found && /^## / { exit } found' CHANGELOG.md > notes.md
-          test -s notes.md || echo "See CHANGELOG.md." > notes.md
+          {
+            echo 'Download `agency.rivo.usage-meter-for-claude.streamDeckPlugin` below and double-click it to install. Needs Stream Deck 6.9 or later on macOS 12+ or Windows 10+.'
+            echo
+            awk -v v="$VERSION" 'index($0, "## " v " ") == 1 { found = 1; next } found && /^## / { exit } found' CHANGELOG.md
+          } > notes.md
       - name: Publish the release
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
           file=dist/agency.rivo.usage-meter-for-claude.streamDeckPlugin
-          # a release made by hand for this tag gets the file built here
-          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" "$file" --clobber
+          # a release that already exists for this version gets the file built here
+          if gh release view "v$VERSION" > /dev/null 2>&1; then
+            gh release upload "v$VERSION" "$file" --clobber
           else
-            gh release create "$GITHUB_REF_NAME" "$file" --title "Usage Meter for Claude ${GITHUB_REF_NAME#v}" --notes-file notes.md
+            gh release create "v$VERSION" "$file" --target "$GITHUB_SHA" --title "Usage Meter for Claude $VERSION" --notes-file notes.md
           fi
